@@ -1,17 +1,16 @@
-import audb2
+import audb
 import audfactory
 
 
-audfactory.config.ARTIFACTORY_ROOT = 'https://audeering.jfrog.io/artifactory'
 DB_ROOT = './build'
 
 
-repository = audb2.Repository(
+repository = audb.Repository(
     name='data-public',
     host='https://audeering.jfrog.io/artifactory',
     backend='artifactory',
 )
-audb2.publish(
+audb.publish(
     DB_ROOT,
     version='1.1.0',
     repository=repository,
