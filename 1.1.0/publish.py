@@ -1,5 +1,4 @@
 import audb
-import audfactory
 
 
 DB_ROOT = './build'
