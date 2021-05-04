@@ -37,7 +37,7 @@ db.schemes['speaker'].labels = {
     15: {'gender': 'male', 'age': 25, 'language': 'deu'},
     16: {'gender': 'female', 'age': 31, 'language': 'deu'},
 }
-db.save(build_dir, storage_format='pkl')
+db.save(build_dir)
 
 audb.publish(
     build_dir,
