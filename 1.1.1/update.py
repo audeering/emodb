@@ -13,8 +13,7 @@ repository = audb.Repository(
     backend='artifactory',
 )
 
-build_dir = audeer.safe_path(build_dir)
-audeer.mkdir(build_dir)
+build_dir = audeer.mkdir(build_dir)
 
 audb.load_to(
     build_dir,
