@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version 1.2.0 (2022/03/21)
+--------------------------
+
+* Added: Unofficial, speaker-independent train and test splits
+
 
 Version 1.1.1 (2021/05/04)
 --------------------------
