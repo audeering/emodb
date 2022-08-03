@@ -1,0 +1,3 @@
+audb >=1.3.0
+audeer
+audformat >=0.15.0
