@@ -1,6 +1,15 @@
 Changelog
 =========
 
+Version 1.3.0 (2022/08/03)
+--------------------------
+
+* Added: ``age`` scheme
+* Added: ``gender`` scheme
+* Added: ``language`` scheme
+* Changed: use misc table to store labels of ``speaker`` scheme
+
+
 Version 1.2.0 (2022/03/21)
 --------------------------
 
