@@ -7,7 +7,7 @@ and published it with [audb]
 to a public Artifactory
 repository on https://audeering.jfrog.io.
 
-The databases is published under [CC0-1.0]
+The databases is published under the [CC0-1.0] license
 and can be downloaded with the Python library [audb] by:
 
 ```python
