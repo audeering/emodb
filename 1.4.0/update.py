@@ -21,7 +21,7 @@ db = audb.load_to(
 )
 
 # Download paper
-rel_paper_path = 'extra/burkhardt2005.pdf'
+rel_paper_path = 'docs/burkhardt2005.pdf'
 abs_paper_path = audeer.path(build_dir, rel_paper_path)
 audeer.mkdir(os.path.dirname(abs_paper_path))
 audeer.download_url(db.meta['pdf'], abs_paper_path)
