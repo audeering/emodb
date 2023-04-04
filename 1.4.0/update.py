@@ -29,7 +29,7 @@ audeer.download_url(db.meta['pdf'], abs_paper_path)
 # Add paper as attachment
 db.attachments['paper'] = audformat.Attachment(
     rel_paper_path,
-    description='Interspeech paper about emodb.',
+    description='INTERSPEECH conference paper on emodb.',
 )
 
 db.save(build_dir)
