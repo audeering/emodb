@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 1.4.0 (2023/04/05)
+--------------------------
+
+* Added: BibTeX entry for INTERSPEECH paper
+  as attachment
+
+
 Version 1.3.0 (2022/08/03)
 --------------------------
 
