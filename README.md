@@ -21,7 +21,7 @@ If you use the database, please cite with
 ```bibtex
 @inproceedings{burkhardt2005emodb,
   title={A database of {German} emotional speech.},
-  author={Burkhardt, Felix and Paeschke, Astrid and Rolfes, Miriam and Sendlmeier, Walter F and Weiss, Benjamin and others},
+  author={Burkhardt, Felix and Paeschke, Astrid and Rolfes, Miriam and Sendlmeier, Walter F and Weiss, Benjamin},
   booktitle={Proceedings of the Annual Conference of the International Speech Communication Association (INTERSPEECH)},
   address={Lisbon, Portugal},
   publisher={ISCA},
