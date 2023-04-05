@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import audb
 import audeer
@@ -20,16 +21,14 @@ db = audb.load_to(
     verbose=True,
 )
 
-# Download paper
-rel_paper_path = 'docs/burkhardt2005.pdf'
-abs_paper_path = audeer.path(build_dir, rel_paper_path)
-audeer.mkdir(os.path.dirname(abs_paper_path))
-audeer.download_url(db.meta['pdf'], abs_paper_path)
-
-# Add paper as attachment
-db.attachments['paper'] = audformat.Attachment(
-    rel_paper_path,
-    description='INTERSPEECH conference paper on emodb.',
+# Add BibTeX file as attchment
+rel_path = 'docs/burkhardt2005emodb.bib'
+abs_path = audeer.path(build_dir, rel_path)
+audeer.mkdir(os.path.dirname(abs_path))
+shutil.copyfile(rel_path, abs_path)
+db.attachments['bibtex'] = audformat.Attachment(
+    rel_path,
+    description='Bibtex citation entry for INTERSPEECH conference paper.',
 )
 
 db.save(build_dir)
