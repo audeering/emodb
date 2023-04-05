@@ -28,7 +28,7 @@ audeer.mkdir(os.path.dirname(abs_path))
 shutil.copyfile(rel_path, abs_path)
 db.attachments['bibtex'] = audformat.Attachment(
     rel_path,
-    description='Bibtex citation entry for INTERSPEECH conference paper.',
+    description='Bibtex citation entry for INTERSPEECH conference paper',
 )
 
 db.save(build_dir)
