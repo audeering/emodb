@@ -139,8 +139,6 @@ cols = ["emotion.naturalness", "emotion.confidence"]
 for col in cols:
     df_all[col] = "na"
     for ind_id, row in df_all.iterrows():
-            if ind_id=="wav/11a04Tc.wav":
-                pass
             val = annotations.loc[ind_id, col]
             df_all.loc[ind_id, col] = val
 # Add a new scheme for naturalness
@@ -190,8 +188,8 @@ for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
 # for tab in ["files", "emotion", "emotion.categories.train.gold_standard", \
 #             "emotion.categories.test.gold_standard"]:
 # Files table
-df_files = df_files.set_index(df_files.index.to_series().\
-                              map(lambda x: x.replace("wav/", f"{folder_laryngo}/")))
+new_index = df_files.index.to_series().map(lambda x: x.replace("wav/", f"{folder_laryngo}/"))
+df_files = df_files.set_index(new_index)
 db['laryngo.files'] = audformat.Table(df_files.index)
 for col in ["duration", "transcription", "speaker"]:
     db['laryngo.files'][col] = audformat.Column(scheme_id=scheme_mapping[col])
