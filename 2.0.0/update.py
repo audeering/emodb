@@ -202,7 +202,7 @@ for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
 # Train and test splits
 for split in ["train", "test"]:
     df = db[f"emotion.categories.{split}.gold_standard"].get()
-    df.set_index(df.index.to_series().\
+    df = df.set_index(df.index.to_series().\
                               map(lambda x: x.replace("wav/", f"{folder_laryngo}/")))
     db[f'laryngo.emotion.categories.{split}.gold_standard'] = audformat.Table(df.index)
     for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
