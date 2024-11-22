@@ -63,15 +63,14 @@ name = 'emodb'
 previous_version = '1.4.1'
 build_dir = './build'
 build_dir = audeer.mkdir(build_dir)
-audio_folder = "audio"
-laryngo_folder = "laryngo"
-
+folder_audio = "audio"
+folder_laryngo = "laryngo"
 
 # Preparation
 
 # Remove the "xx" in the name from all new files
 file_list = os.listdir("audio")
-for folder in [audio_folder, laryngo_folder]:
+for folder in [folder_audio, folder_laryngo]:
     for f in file_list:
         f_new = f.replace("xx.wav", ".wav")
         os.rename(os.path.join(folder, f), os.path.join(folder, f_new))
@@ -88,9 +87,11 @@ annotations = annotations.rename(columns={"recognized":"emotion.confidence",\
                                           "natural":"emotion.naturalness"})
 
 # Get the new files
-file_list_all = sorted(
-    [f for f in os.listdir(audio_folder)]
-)
+# file_list_all = sorted(
+#     [f for f in os.listdir(audio_folder)]
+# )
+file_list_all = os.listdir(folder_audio)
+
 # Get the old files
 db = audb.load_to(
     build_dir,
@@ -105,12 +106,12 @@ files_exist = [f.replace("wav/", "") for f in file_list_exist]
 # Which files are new?
 file_list_new = list(set(file_list_all) - set(files_exist))
 # Copy the new files to their folders
-laryngo_dir = audeer.mkdir(os.path.join(build_dir, "laryngo"))
+laryngo_dir = audeer.mkdir(os.path.join(build_dir, folder_laryngo))
 for f in file_list_new:
-    shutil.copyfile(os.path.join(audio_folder, f), os.path.join(build_dir, "wav", f))
+    shutil.copyfile(os.path.join(folder_audio, f), os.path.join(build_dir, "wav", f))
 print(f"copied {len(file_list_new)} new audio files to emodb.")
 for f in file_list_all:
-    shutil.copyfile(os.path.join(laryngo_folder, f),\
+    shutil.copyfile(os.path.join(folder_laryngo, f),\
                     os.path.join(build_dir, laryngo_dir, f))
 print(f"copied {len(file_list_all)} laryngogram files to emodb.")
 
@@ -122,7 +123,7 @@ emotions = list(parse_names(names, from_i=5, to_i=6, mapping=emotion_mapping))
 speakers = list(parse_names(names, from_i=0, to_i=2, is_number=True))
 durations = audeer.run_tasks(
     task_func=lambda x: pd.to_timedelta(
-        af.duration(os.path.join(audio_folder, x)),
+        af.duration(os.path.join(folder_audio, x)),
         unit='s',
     ),
     params=[([f], {}) for f in file_list_all],
@@ -190,7 +191,7 @@ for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
 #             "emotion.categories.test.gold_standard"]:
 # Files table
 df_files = df_files.set_index(df_files.index.to_series().\
-                              map(lambda x: x.replace("wav/", f"{laryngo_folder}/")))
+                              map(lambda x: x.replace("wav/", f"{folder_laryngo}/")))
 db['laryngo.files'] = audformat.Table(df_files.index)
 for col in ["duration", "transcription", "speaker"]:
     db['laryngo.files'][col] = audformat.Column(scheme_id=scheme_mapping[col])
@@ -204,7 +205,7 @@ for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
 for split in ["train", "test"]:
     df = db[f"emotion.categories.{split}.gold_standard"].get()
     df.set_index(df.index.to_series().\
-                              map(lambda x: x.replace("wav/", f"{laryngo_folder}/")))
+                              map(lambda x: x.replace("wav/", f"{folder_laryngo}/")))
     db[f'laryngo.emotion.categories.{split}.gold_standard'] = audformat.Table(df.index)
     for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
         db[f'laryngo.emotion.categories.{split}.gold_standard'][col] = \
@@ -212,19 +213,19 @@ for split in ["train", "test"]:
         db[f'laryngo.emotion.categories.{split}.gold_standard'][col].set(df[col].values)
     df = db[f"emotion.categories.{split}.gold_standard"].get()
     df.set_index(df.index.to_series().\
-                              map(lambda x: x.replace("wav/", f"{laryngo_folder}/")))
+                              map(lambda x: x.replace("wav/", f"{folder_laryngo}/")))
 
 
 df = db[table_new_name].get()
 df.set_index(df.index.to_series().\
-                            map(lambda x: x.replace("wav/", f"{laryngo_folder}/")))
+                            map(lambda x: x.replace("wav/", f"{folder_laryngo}/")))
 db[f'laryngo.{table_new_name}'] = audformat.Table(df.index)
 for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
     db[f'laryngo.{table_new_name}'][col] = \
         audformat.Column(scheme_id=scheme_mapping[col], rater_id='gold')
     db[f'laryngo.{table_new_name}'][col].set(df[col].values)
 
-db.save("test_build", storage_format=audformat.define.TableStorageFormat.CSV)
-db = audformat.Database.load("test_build")
+db.save(build_dir, storage_format=audformat.define.TableStorageFormat.CSV)
+db = audformat.Database.load(build_dir)
 print(db)
 print("Done.")
