@@ -8,7 +8,7 @@ This update of the [Berlin EmoDB](http://database.syntheticspeech.de/)
 
 
 ## How to replicate this update:
-* get a copy of the original database (containes a folder "wav_laryng" with 817 stereo files) by mailing the original authors
+* get a copy of the original database (contains a folder "wav_laryng" with 817 stereo files) by mailing the original authors
 
 * unpack the folder "wav_laryng" and the file "listener_judgements.txt"
   
