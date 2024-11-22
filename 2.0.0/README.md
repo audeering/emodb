@@ -16,7 +16,10 @@ This update of the [Berlin EmoDB](http://database.syntheticspeech.de/)
   
 * use sox to split the files:
 ```
+# Extract audio channel 1 (main audio) from each WAV file
 for f in wav_laryng/*wav; do sox $f audio/`basename $f` remix 1; done
+
+# Extract audio channel 2 (laryngograph signal) from each WAV file  
 for f in wav_laryng/*wav; do sox $f laryngo/`basename $f` remix 2; done
 ```
 
