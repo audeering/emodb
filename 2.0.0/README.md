@@ -2,7 +2,7 @@
 
 This update of the [Berlin EmoDB](http://database.syntheticspeech.de/)
 
-* adds 281 previously not contained files (that have not been recognized by 80% of the labelers).
+* adds 281 previously not contained files (where less than 80% of labelers agreed on the emotion).
 * adds 816 (for every audio file) [laryngograms](https://en.wikipedia.org/wiki/Electroglottograph), in wav format with 16kHz sampling rate.
 * adds a "natural" value to all samples, like the "confidence" values, as the original authors asked the labelers also "how natural does this sample sound?"
 
