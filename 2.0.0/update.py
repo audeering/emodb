@@ -185,8 +185,6 @@ for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
 
 # Now all for the laryngograms
 
-# for tab in ["files", "emotion", "emotion.categories.train.gold_standard", \
-#             "emotion.categories.test.gold_standard"]:
 # Files table
 new_index = df_files.index.to_series().map(lambda x: x.replace("wav/", f"{folder_laryngo}/"))
 df_files = df_files.set_index(new_index)
