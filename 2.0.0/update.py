@@ -57,7 +57,7 @@ def parse_names(names, from_i, to_i, is_number=False, mapping=None):
             key = int(key)
         yield mapping[key] if mapping else key
 
-# Same constants
+# Some constants
 
 name = 'emodb'
 previous_version = '1.4.1'
