@@ -166,7 +166,9 @@ for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
     db['emotion'][col] = audformat.Column(scheme_id=scheme_mapping[col])
     db['emotion'][col].set(df_emotion[col])
 # Train and test splits
-for split in ["train", "test"]:
+splits = {"train":audformat.define.SplitType.TRAIN, \
+    "test":audformat.define.SplitType.TEST}
+for split in splits.keys():
     df = db[f"emotion.categories.{split}.gold_standard"].get()
     df_select = df_all[df_all.index.isin(df.index)]
     db[f'emotion.categories.{split}.gold_standard']['emotion.naturalness'] = \
@@ -194,12 +196,14 @@ df_emotion = df_emotion.set_index(df_files.index)
 for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
     db['laryngo.emotion'][col] = audformat.Column(scheme_id=scheme_mapping[col])
     db['laryngo.emotion'][col].set(df_emotion[col])
+
 # Train and test splits
-for split in ["train", "test"]:
+for split in splits.keys():
     df = db[f"emotion.categories.{split}.gold_standard"].get()
     df = df.set_index(df.index.to_series().\
                               map(lambda x: x.replace("wav/", f"{folder_laryngo}/")))
-    db[f'laryngo.emotion.categories.{split}.gold_standard'] = audformat.Table(df.index)
+    db[f'laryngo.emotion.categories.{split}.gold_standard'] = audformat.Table(df.index,\
+        split_id = splits[split])
     for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
         db[f'laryngo.emotion.categories.{split}.gold_standard'][col] = \
             audformat.Column(scheme_id=scheme_mapping[col], rater_id='gold')
