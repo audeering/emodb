@@ -191,8 +191,8 @@ db['laryngo.files'] = audformat.Table(df_files.index)
 for col in ["duration", "transcription", "speaker"]:
     db['laryngo.files'][col] = audformat.Column(scheme_id=scheme_mapping[col])
     db['laryngo.files'][col].set(df_files[col])
-db['laryngo.emotion'] = audformat.Table(df_emotion.index)
 df_emotion = df_emotion.set_index(df_files.index)
+db['laryngo.emotion'] = audformat.Table(df_emotion.index)
 for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
     db['laryngo.emotion'][col] = audformat.Column(scheme_id=scheme_mapping[col])
     db['laryngo.emotion'][col].set(df_emotion[col])
