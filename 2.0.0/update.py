@@ -98,7 +98,7 @@ db = audb.load_to(
     cache_root=None,
     verbose=True,
 )
-file_list_exist = db["files"].get().index.values
+file_list_exist = db.files.values
 files_exist = [f.replace("wav/", "") for f in file_list_exist]
 # Which files are new?
 file_list_new = list(set(file_list_all) - set(files_exist))
