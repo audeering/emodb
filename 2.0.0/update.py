@@ -223,7 +223,7 @@ for col in ["emotion", "emotion.confidence", "emotion.naturalness"]:
     db[f'laryngo.{table_new_name}'][col].set(df[col].values)
 
 # Lastly, update the description
-db["description"] =  "Berlin Database of Emotional Speech."+\
+db.description = "Berlin Database of Emotional Speech."+\
     " A German database of emotional utterances spoken by actors recorded"+\
     " as a part of the DFG funded research project SE462/3-1 in 1997 and 1999."+\
     " Recordings took place in the anechoic chamber of the Technical University"+\
