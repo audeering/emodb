@@ -87,9 +87,6 @@ annotations = annotations.rename(columns={"recognized":"emotion.confidence",\
                                           "natural":"emotion.naturalness"})
 
 # Get the new files
-# file_list_all = sorted(
-#     [f for f in os.listdir(audio_folder)]
-# )
 file_list_all = os.listdir(folder_audio)
 
 # Get the old files
