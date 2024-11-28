@@ -24,8 +24,10 @@ for f in wav_laryng/*wav; do sox $f audio/`basename $f` remix 1; done
 for f in wav_laryng/*wav; do sox $f laryngo/`basename $f` remix 2; done
 ```
 
-* install the requirements.txt.lock
+* Install requirements, build and publish the data:
 
-* run the update.py script
-
-* run the publish.py script
+```bash
+pip install -r requirements.txt.lock
+python update.py
+python publish.py
+```
