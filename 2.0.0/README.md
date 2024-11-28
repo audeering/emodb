@@ -10,16 +10,17 @@ This update of the [Berlin EmoDB](http://database.syntheticspeech.de/)
 ## How to replicate this update:
 * get a copy of the original database (contains a folder "wav_laryng" with 817 stereo files) by mailing the original authors
 
-* unpack the folder "wav_laryng" and the file "listener_judgements.txt"
-  
-* make two folders : "audio" and "laryngo"
-  
-* use sox to split the files:
-```
+* Run the following commands to prepare the data:
+
+```bash
+unzip emoDB.zip
+mv emoDB/wav_laryng .
+mv emoDB/listener_judgements.txt .
+mkdir audio
+mkdir laryngo
 # Extract audio channel 1 (main audio) from each WAV file
 for f in wav_laryng/*wav; do sox $f audio/`basename $f` remix 1; done
-
-# Extract audio channel 2 (laryngograph signal) from each WAV file  
+# Extract audio channel 2 (laryngograph signal) from each WAV file
 for f in wav_laryng/*wav; do sox $f laryngo/`basename $f` remix 2; done
 ```
 
