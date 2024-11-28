@@ -76,7 +76,7 @@ for folder in [folder_audio, folder_laryngo]:
         os.rename(os.path.join(folder, f), os.path.join(folder, f_new))
 
 # Parse the list with label agreements and naturalness
-annotations = pd.read_csv("listener_judgements.txt", sep="\t", index_col="sample")
+annotations = pd.read_csv("listener_judgements.txt", sep="\t", index_col="sample", encoding="ISO-8859-1")
 # Align the index with database index
 annotations = annotations.set_index(annotations.index.to_series()\
                                     .map(lambda x: "wav/"+x))
