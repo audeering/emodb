@@ -1,5 +1,9 @@
 # emodb
 
+For further publications of `emodb`, please go to https://github.com/audeering/datasets/tree/main/datasets/emodb
+
+---
+
 This project holds code
 to convert the [emodb] database of acted emotions
 to [audformat]
